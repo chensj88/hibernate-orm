@@ -6,10 +6,6 @@
  */
 package org.hibernate.boot.model.process.spi;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.hibernate.boot.AttributeConverterInfo;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.internal.InFlightMetadataCollectorImpl;
@@ -20,19 +16,10 @@ import org.hibernate.boot.model.TypeContributor;
 import org.hibernate.boot.model.process.internal.ManagedResourcesImpl;
 import org.hibernate.boot.model.process.internal.ScanningCoordinator;
 import org.hibernate.boot.model.source.internal.annotations.AnnotationMetadataSourceProcessorImpl;
-import org.hibernate.boot.model.source.internal.hbm.EntityHierarchyBuilder;
-import org.hibernate.boot.model.source.internal.hbm.EntityHierarchySourceImpl;
-import org.hibernate.boot.model.source.internal.hbm.HbmMetadataSourceProcessorImpl;
-import org.hibernate.boot.model.source.internal.hbm.MappingDocument;
-import org.hibernate.boot.model.source.internal.hbm.ModelBinder;
+import org.hibernate.boot.model.source.internal.hbm.*;
 import org.hibernate.boot.model.source.spi.MetadataSourceProcessor;
 import org.hibernate.boot.registry.classloading.spi.ClassLoaderService;
-import org.hibernate.boot.spi.AdditionalJaxbMappingProducer;
-import org.hibernate.boot.spi.BasicTypeRegistration;
-import org.hibernate.boot.spi.BootstrapContext;
-import org.hibernate.boot.spi.MetadataBuildingOptions;
-import org.hibernate.boot.spi.MetadataContributor;
-import org.hibernate.boot.spi.MetadataImplementor;
+import org.hibernate.boot.spi.*;
 import org.hibernate.cfg.MetadataSourceType;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.jdbc.spi.JdbcServices;
@@ -43,11 +30,15 @@ import org.hibernate.type.descriptor.sql.SqlTypeDescriptor;
 import org.hibernate.type.spi.TypeConfiguration;
 import org.hibernate.usertype.CompositeUserType;
 import org.hibernate.usertype.UserType;
-
 import org.jboss.jandex.IndexView;
 import org.jboss.logging.Logger;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
+ * 转换器： 处理{@link org.hibernate.boot.MetadataSources}到{@link org.hibernate.boot.Metadata}
  * Represents the process of of transforming a {@link org.hibernate.boot.MetadataSources}
  * reference into a {@link org.hibernate.boot.Metadata} reference.  Allows for 2 different process paradigms:<ul>
  *     <li>
